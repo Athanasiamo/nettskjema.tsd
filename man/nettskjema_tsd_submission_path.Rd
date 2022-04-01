@@ -4,7 +4,7 @@
 \alias{nettskjema_tsd_submission_path}
 \title{Find the path for encrypted Nettskjema data}
 \usage{
-nettskjema_tsd_submission_path(project = Sys.getenv("nettskjema.tsd.project"))
+nettskjema_tsd_submission_path(project = NULL)
 }
 \arguments{
 \item{project}{current TSD project. Will automatically auto-detect project.}

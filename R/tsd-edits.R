@@ -45,6 +45,7 @@ nettskjema_tsd_apply_edits <- function(input_file,
 #' @param pattern regex pattern to match files with
 #' @template project
 #' @template output_dir
+#' @param suffix character. String to be added at the end of files with edits applied.
 #'
 #' @return data frame with edits applied
 #' @export

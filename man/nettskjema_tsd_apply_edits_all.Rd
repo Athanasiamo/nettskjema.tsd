@@ -17,6 +17,8 @@ nettskjema_tsd_apply_edits_all(
 
 \item{pattern}{regex pattern to match files with}
 
+\item{suffix}{character. String to be added at the end of files with edits applied.}
+
 \item{project}{current TSD project. Will automatically auto-detect project.}
 
 \item{output_dir}{character. Path to output directory.}

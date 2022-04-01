@@ -4,7 +4,13 @@
 \alias{nettskjema_tsd_decrypt_form}
 \title{Decrypt all files associated with a form}
 \usage{
-nettskjema_tsd_decrypt_form(path, rerun_all = FALSE, output_dir = NULL, ...)
+nettskjema_tsd_decrypt_form(
+  path,
+  rerun_all = FALSE,
+  output_dir = NULL,
+  verbose = NULL,
+  ...
+)
 }
 \arguments{
 \item{path}{path to the folder with encrypted data}
@@ -12,6 +18,8 @@ nettskjema_tsd_decrypt_form(path, rerun_all = FALSE, output_dir = NULL, ...)
 \item{rerun_all}{logical. Should the process be run on all files, even those previously run. Default is FALSE.}
 
 \item{output_dir}{character. Path to output directory.}
+
+\item{verbose}{logical. Should the function output status messages. Default is TRUE.}
 
 \item{...}{other arguments to \link{nettskjema_tsd_decrypt_file}}
 }
