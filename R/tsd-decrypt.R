@@ -38,6 +38,7 @@ nettskjema_tsd_decrypt_file <- function(path,
 #' @param path path to the folder with encrypted data
 #' @template rerun_all
 #' @template output_dir
+#' @template verbose
 #' @param ... other arguments to \link{nettskjema_tsd_decrypt_file}
 #'
 #' @return nothing. Writes decrypted files to a folder.
@@ -47,6 +48,7 @@ nettskjema_tsd_decrypt_file <- function(path,
 nettskjema_tsd_decrypt_form <- function(path,
                                         rerun_all = FALSE,
                                         output_dir = NULL,
+                                        verbose = NULL,
                                         ...
 ){
   if(is.null(output_dir))

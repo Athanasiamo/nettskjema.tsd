@@ -82,3 +82,7 @@ mkdir <- function(dir, ...){
   if(!dir.exists(dir))
     dir.create(dir, recursive = TRUE, ...)
 }
+
+is_symlink <- function(paths){
+  isTRUE(nzchar(Sys.readlink(paths), keepNA=TRUE))
+}

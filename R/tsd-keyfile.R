@@ -126,6 +126,7 @@ check_key <- function(){
   stopifnot(on_tsd())
 
   hash <- basename(nettskjema_tsd_submission_path())
+  hash <- substr(hash, 9, 16)
   resp <- system2("gpg", "--list-secret-keys", stdout = TRUE)
   any(grepl(hash, resp))
 }
