@@ -80,10 +80,10 @@ nettskjema_tsd_json2data <- function(input_dir, output_file = NULL){
   dt <- dt[order(dt$submissionId),]
   if(!is.null(output_file))
     utils::write.table(dt,
-                output_file,
-                sep = "\t",
-                row.names = FALSE,
-                quote = FALSE)
+                       output_file,
+                       sep = "\t",
+                       row.names = FALSE,
+                       quote = FALSE)
   dt
 }
 
@@ -141,9 +141,9 @@ nettskjema_tsd_csv2data <- function(input_dir, output_file = NULL){
 
   if(!is.null(output_file))
     utils::write.table(dt, output_file,
-                sep = "\t",
-                row.names = FALSE,
-                quote = FALSE)
+                       sep = "\t",
+                       row.names = FALSE,
+                       quote = FALSE)
   return(dt)
 }
 
@@ -188,8 +188,6 @@ combine_data <- function(formid, input_dir, output_dir,
 #' @return invisible logical list of whether the symlink is made
 #' @noRd
 tidy_attachments <- function(input_dir, output_dir, force = TRUE, ...){
-  mkdir(output_dir)
-
   files <- list.files(input_dir, "^[0-9]{5}.*[-|_]", full.names = TRUE)
   links <- file.path(output_dir, basename(files))
 
@@ -198,12 +196,16 @@ tidy_attachments <- function(input_dir, output_dir, force = TRUE, ...){
     k <- sapply(links[links_e], file.remove)
   }
 
-  invisible(
-    mapply(file.symlink,
-           to = links,
-           from = files,
-           ...)
-  )
+  if(length(links) > 1){
+    mkdir(output_dir)
+
+    invisible(
+      mapply(file.symlink,
+             to = links,
+             from = files,
+             ...)
+    )
+  }
 }
 
 #' Restructure data
