@@ -1,0 +1,19 @@
+---
+title: "Using nettskjema in TSD"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using nettskjema in TSD}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(nettskjema.tsd)
+```
