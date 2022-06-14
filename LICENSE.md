@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2022 Center for Lifespan Changes in Brain and Cognition, University of Oslo
+Copyright (c) 2022 nettskjema.tsd authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
