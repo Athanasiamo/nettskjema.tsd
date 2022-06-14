@@ -182,23 +182,26 @@ combine_data <- function(formid, input_dir, output_dir,
 #'
 #' @template input_dir
 #' @template output_dir
+#' @templpate verbose
 #' @param force logical, if new symlinks should be force created.
 #' @param ... other arguments to \code{\link[base]{mapply}}
 #'
 #' @return invisible logical list of whether the symlink is made
 #' @noRd
-tidy_attachments <- function(input_dir, output_dir, force = TRUE, ...){
+tidy_attachments <- function(input_dir, output_dir, force = TRUE, verbose = NULL, ...){
+  if(is.null(verbose))
+    verbose <- verbosity()
+
   files <- list.files(input_dir, "^[0-9]{5}.*[-|_]", full.names = TRUE)
   links <- file.path(output_dir, basename(files))
 
-  if(force){
-    links_e <- sapply(links, is_symlink)
-    k <- sapply(links[links_e], file.remove)
-  }
-
   if(length(links) > 1){
+    if(verbose) cat("... tidying attachments\n")
     mkdir(output_dir)
-
+    if(force){
+      links_e <- sapply(links, is_symlink)
+      k <- sapply(links[links_e], file.remove)
+    }
     invisible(
       mapply(file.symlink,
              to = links,
@@ -258,8 +261,9 @@ backup_data <- function(files,
     mapply(file.copy,
            from = files,
            to = file.path(output_dir, basename(files)),
-           MoreArgs = list(copy.mode = TRUE,
-                           copy.date = TRUE),
+           MoreArgs = list(
+             copy.mode = TRUE,
+             copy.date = TRUE),
            ...
     )
   )

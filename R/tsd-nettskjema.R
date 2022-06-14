@@ -52,7 +52,6 @@ nettskjema_tsd_organise_form <- function(
    return(FALSE)
   }
   if(verbose) message("... decrypting")
-
   k <- mapply(
     nettskjema_tsd_decrypt_file,
     path = files,
@@ -66,7 +65,8 @@ nettskjema_tsd_organise_form <- function(
 
   tidy_attachments(
     output_dir_d,
-    file.path(output_dir, "attachments")
+    file.path(output_dir, "attachments"),
+    verbose = verbose
   )
 
   Sys.chmod(paths = c(outfiles, files), mode = "0755")

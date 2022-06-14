@@ -17,7 +17,7 @@ nettskjema_tsd_decrypt_file <- function(path,
   if(!check_key())
     nettskjema_tsd_import_key()
 
-  args <- sprintf("--decrypt %s --batch --yes", path)
+  args <- sprintf("--batch --yes --decrypt %s", path)
 
   if(!is.null(output_path))
     args <- sprintf("--output %s %s",

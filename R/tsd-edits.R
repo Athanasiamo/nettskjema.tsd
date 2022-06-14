@@ -103,15 +103,13 @@ nettskjema_tsd_apply_edits_all <- function(input_dir = NULL,
 apply_edits <- function(path, edits, outfile = NULL){
   if(file.info(path)$size <= 1) return()
   dt <- read.delim(path, stringsAsFactors = FALSE)
-  dto <- dt
   ed <- read_json(edits)
   for(x in names(ed)){
-   # browser()
     tmp <- ed[[x]][["data"]]
     idx <- match(x, dt[,"submissionId"])
     if(is.na(idx)){
       warning(sprintf("SubmissionId '%s' not found in data file %s", x, path), call. = FALSE)
-    }else if(is.null(tmp)){
+    }else if(length(tmp) == 0){
       dt <- dt[idx*-1,]
     }else{
       for(i in 1:length(tmp)){
