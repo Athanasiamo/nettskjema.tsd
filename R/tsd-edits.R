@@ -102,7 +102,7 @@ nettskjema_tsd_apply_edits_all <- function(input_dir = NULL,
 #' @noRd
 apply_edits <- function(path, edits, outfile = NULL){
   if(file.info(path)$size <= 1) return()
-  dt <- read.delim(path, stringsAsFactors = FALSE)
+  dt <- read_nettskjema_tsd(path)
   ed <- read_json(edits)
   for(x in names(ed)){
     tmp <- ed[[x]][["data"]]

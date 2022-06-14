@@ -1,3 +1,18 @@
+#' Read nettskjema data
+#'
+#' Utility function to read in nettskjema data.
+#' forced all columns to character to not loose leading zero.
+#' @importFrom utils read.delim
+#' @return a dataframe with nettskjema data
+#' @param path string path to a nettskjema file
+#' @examples
+#' \dontrun{
+#' read_nettskjema_tsd("/tsd/pxx/nettskjema/form.csv")
+#' }
+read_nettskjema_tsd <- function(path){
+  read.delim(path, stringsAsFactors = FALSE, colClasses = character)
+}
+
 #' @noRd
 on_tsd <- function(){
   on_linux()

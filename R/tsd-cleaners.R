@@ -120,8 +120,7 @@ nettskjema_tsd_csv2data <- function(input_dir, output_file = NULL){
     return(NA)
   }
 
-  # character colclasses to avoid loosing leading zero
-  dt <- lapply(files, utils::read.delim, colClasses = "character")
+  dt <- lapply(files, read_nettskjema_tsd)
   cols <- unique(unlist(sapply(dt, names)))
   miss <- sapply(dt, function(x) any(!cols %in% names(x)))
 
@@ -182,7 +181,7 @@ combine_data <- function(formid, input_dir, output_dir,
 #'
 #' @template input_dir
 #' @template output_dir
-#' @templpate verbose
+#' @template verbose
 #' @param force logical, if new symlinks should be force created.
 #' @param ... other arguments to \code{\link[base]{mapply}}
 #'
