@@ -1,5 +1,5 @@
 ---
-title: "Using nettskjema in TSD"
+title: "Using nettskjema.tsd in TSD"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using nettskjema in TSD}
@@ -17,3 +17,116 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(nettskjema.tsd)
 ```
+
+Currently, nettskjema data sent to TSD are stored on `durable/nettskjema-submissions/XXX/` where each nettskjema har its own folder with the nettskjema id (that can be found in the URL of the nettskjema in the nettskjema portal). 
+All Nettskjema that are connected to our TSD project send data to this spot, with one file per response, in an encrypted file in both json and csv format.
+
+All answers to nettskjema can be found immedately in the Nettquick application within TSD (found under the main TULS page within TSD), and as such, quick inspection of incoming data should be done there. 
+The remaining Nettskjema pipeline is more elaborate, and only runs ever few hours.
+
+## Pipeline in short
+At its core, the single function `nettskjema_tsd_organise_all_forms()` starts and sets up the entire pipeline for you. 
+There are several options to specify custom output locations, rerunning all files again etc, but these can be checked out in the function documentation.
+
+- Single response data come in encrypted to TSD
+  - `durable/nettskjema-submissions/XXXX`
+- Files are copied to a new safe location
+  - `durable/nettskjema-submissions/cleaned` by default
+  - custom path can be specified
+- Data are decrypted
+- Single responses are combined into larger data sets
+  - creates files with names like
+  - `form-xxxxx.csv` (data source is incoming csv files)
+  - `form-xxxxx-json.csv` (data source is incoming json files)
+
+And optional bit can be run for applying edits to data values that have been entered incorrectly, while still retaining the original raw data.
+We do not recommend ever directly changing raw data, but rather use the editing pipeline provided to keep raw data intact, have a log of changes needed and the reasons for these, and have a working clean data set.
+
+
+## Data location
+The data are first copied over to safe new space, where we can more easily store the data in the way we want, and continue working on them.
+The incoming data folder is locked in such a way that we are only allowed to copy data out of the folder, not work there in any way.
+
+The new data location is by default the same spot as the incoming data, `durable/nettskjema-submissions/cleaned`
+Here, just like in the raw folder, each nettskjema has its own folder using the nettskjema ID.
+
+```
+-- 177322
+    -- attachments/
+    -- edits-177322.json
+    -- form-177322.csv
+    -- form-177322-json.csv
+    -- form-177322-json-wids.csv
+    -- form-177322-json-wids-ed.csv
+    -- submissions/
+         -- decrypted/
+|    -- form-177322-2020-01-31-18-14-32.json
+|    -- form-177322-2020-02-23-13-44-01.json
+|    -- form-177322-2020-02-24-10-32-22.json
+         -- encrypted/
+|    -- form-177322-2020-01-31-18-14-32.json.asc
+|    -- form-177322-2020-02-23-13-44-01.json.asc
+|    -- form-177322-2020-02-24-10-32-22.json.asc
+```
+
+
+The submission's folder contains all single file submissions (answers) to the nettskjema. 
+The encrypted are exactly as they are when they enter TSD, and the decrypted are the same files but decrypted so they may be read by users.
+Some nettskjema might also have attachment folders, which should contain all the attachments that might come with a nettskjema (if the form has the option to add attachments).
+
+## Data decryption
+Data are encrypted and decrypted with gpg. 
+
+The data that are encrypted are:
+
+- submissions as json data
+- submissions as csv data
+- form meta data (resent every time there is a change in the Nettskjema form)
+
+## Data combining
+
+The submission data are combined into data sets for each nettskjema, using both the jsons and csv. 
+The data sources are a little different, which is why we create files from both.
+Generally, combining data from jsons are more robust than combining data from the csv sources, because the json files do not have issues with possible column mis-matches.
+
+## Data editing
+There are also options for creating edited versions of the data, in case there are incorrectly submitted values to the nettskjema data.
+These edits are stored as json files, specifying which data should be edited in the combined data.
+Edit files are named in the form `edits-XXXX.json` where `XXXX` is the nettskjema form id, and is stored in the same location as the `form-xxxx.csv` files.
+The edit jsons are organised after submission ids, which is the unique identifier of ANY nettskjema submission.
+
+```
+{
+   "889922": {
+       "data": {
+          "sex": {
+             "value": "female",
+             "comment": "incorrectly punched by RA"
+          },
+          "cvlt_a_total": {
+             "value": "45",
+             "comment": "incorrectly calculated"
+         }
+     }
+  },
+  "872635":{
+      "data": {},
+      "comment": "double punched"
+  }
+}
+```
+
+In the case above, the first submission has two variables that were entered incorrectly.
+The `sex` should be female, and `cvlt_a_total` should be 45. 
+Each of these has their own comments on why the change is needed.
+The second submission has been entered by mistake, and so should be deleted in its entirety.
+
+This way we can keep easy track of all edits made to the nettskjema data for posterity.
+
+Edits can be applied to all nettskjema data with a single command if needed:
+
+```r
+nettskjema_tsd_apply_edits_all()
+```
+
+This will create new combined files for the form with the ending `-ed`, so you can always preserve the intact raw data, but also have a working cleaned data set.

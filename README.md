@@ -70,3 +70,21 @@ Please note that the nettskjema.tsd project is released with a
 [Contributor Code of
 Conduct](https://athanasiamo.github.io/nettskjema.tsd/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
+
+## Dev description
+
+Documentation of the package is in progress, at its core it:
+
+-   auto-detects gpg password by searching in default areas
+-   decrypts new files as they have come in
+-   copy files over to a new specified location
+-   merges submissions into a single file for csv, it checks for header
+    compatibility between submissions, so even if the form has changed,
+    this should not break.
+-   for json, it uses the meta-data accompanying a form to make sure
+    column names are correct, also should not break if form changes.
+-   Moves all form attachments into an attachments folder
+-   if an edits-xxx.json file exists, will apply the edits specified in
+    the file to the data and output a new csv file appended with ed.
+
+The package is still in development and has some messy code for now.
