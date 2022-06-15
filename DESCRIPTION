@@ -1,35 +1,37 @@
 Package: nettskjema.tsd
 Type: Package
-Title: Decryp and Organise Nettskjema data Within TSD
-Version: 0.1.0
+Title: Decrypt and Organise Nettskjema Data Within TSD
+Version: 0.0.1
 Authors@R: c(
             person("Athanasia Mo", "Mowinckel", 
                     email = "a.m.mowinckel@psykologi.uio.no", 
                     role = c("aut", "cre"),
                     comment = c(ORCID = "0000-0002-5756-0223"))
                     )
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: Working with Nettskjema (<https://nettskjema.no/>) data inside TSD can be challenging.
-    This package aims to aid users in managing their incoming Nettskjema
+Description: Working with Nettskjema (<https://nettskjema.no/>) data inside 
+    TSD can be challenging. This package aims to aid users in managing their incoming Nettskjema
     data by decrypting the data and storing the nettskjema data and 
     meta-data in convenient and standardised ways. This package functionality
-    currently only works on the Linux VMs of TSD.
+    currently only works on the Linux VMs of TSD, and for version 1 of the 
+    nettskjema data delivery to TSD.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Depends: R (>= 3.0.0)
 Imports:
     jsonlite,
     pbapply,
-    utils,
-    dplyr,
-    readr,
-    tidyr
-RoxygenNote: 7.1.2
-VignetteBuilder: knitr
-Language: en-US
+    utils
 Suggests: 
     rmarkdown,
-    knitr
-URL: https://github.com/Athanasiamo/nettskjema.tsd
-BugReports: https://github.com/Athanasiamo/nettskjema.tsd/issues
+    knitr,
+    remotes,
+    devtools,
+    testthat (>= 3.0.0),
+    spelling
+RoxygenNote: 7.2.0
+VignetteBuilder: knitr
+Language: en-US
+URL: https://github.com/LCBC-UiO/nettskjema.tsd
+BugReports: https://github.com/LCBC-UiO/nettskjema.tsd/issues
+Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
