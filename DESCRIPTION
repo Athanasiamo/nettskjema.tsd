@@ -31,3 +31,5 @@ Language: en-US
 Suggests: 
     rmarkdown,
     knitr
+URL: https://github.com/Athanasiamo/nettskjema.tsd
+BugReports: https://github.com/Athanasiamo/nettskjema.tsd/issues
