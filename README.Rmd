@@ -28,16 +28,36 @@ This package functionality currently only works on the Linux VMs of TSD, and for
 
 ## Installation
 
-You can install the development version of nettskjema.tsd from [GitHub](https://github.com/) with:
+Install the package from the LCBC R-universe:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("Athanasiamo/nettskjema.tsd")
+```r
+# Enable universe(s) by lcbc-uio
+options(repos = c(
+  lcbcuio = 'https://lcbc-uio.r-universe.dev',
+  CRAN = 'https://cloud.r-project.org'))
+
+# Install some packages
+install.packages('nettskjema.tsd')
 ```
 
-## Example
+OR using the the package remotes to install.
 
-This is a basic example which shows you how to solve a common problem:
+```r
+# install.packages("remotes")
+remotes::install_github("lcbc-uio/questionnaires")
+```
+
+
+## Caveats
+
+- Examples on how to use nettskjema.tsd outside TSD is difficult, as it is specifically created to work on nettskjema data within TSD.
+- It also only works on the linux VMs, not on the windows VMs of TSD.
+  This has to do with how the file systems are treated differently between linux and windows machines on TSD.
+- The package also only deals with the first version of nettskjema data on TSD that relies on working with delivered files.
+Second version uses internal databases to deal with incoming data.
+We are working on getting this fixed.
+
+## Example
 
 ```{r example}
 library(nettskjema.tsd)
