@@ -147,6 +147,8 @@ nettskjema_tsd_csv2data <- function(input_dir, output_file = NULL){
 }
 
 
+#' Internal function to combine the nettskjema data
+#' @noRd
 combine_data <- function(formid, input_dir, output_dir,
                          verbose = verbosity()){
 

@@ -31,7 +31,8 @@ Suggests:
 RoxygenNote: 7.2.0
 VignetteBuilder: knitr
 Language: en-US
-URL: https://github.com/LCBC-UiO/nettskjema.tsd
+URL: https://github.com/LCBC-UiO/nettskjema.tsd,
+    https://lcbc-uio.github.io/nettskjema.tsd/
 BugReports: https://github.com/LCBC-UiO/nettskjema.tsd/issues
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3

@@ -16,7 +16,7 @@ Nothing. Imports the key to the session
 }
 \description{
 As a security measure, all submissions to Nettskjema data in to
-TSD are encrypted. These encrypted files need to de decrypted
+TSD are encrypted. These encrypted files need to be decrypted
 before they can be sorted and prepared for use in R (or  other
 programs). To decrypt the data, R needs to have access to the
 secret key that will verify that the decryption is ok to carry

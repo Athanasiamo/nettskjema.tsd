@@ -8,5 +8,5 @@
 #'
 #' @noRd
 .onLoad <- function(libname, pkgname){
-  on_tsd()
+    on_tsd()
 }

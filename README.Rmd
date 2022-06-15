@@ -16,9 +16,15 @@ knitr::opts_chunk$set(
 # nettskjema.tsd
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/Athanasiamo/nettskjema.tsd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Athanasiamo/nettskjema.tsd/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/nettskjema.tsd)](https://CRAN.R-project.org/package=nettskjema.tsd)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- [![downloads](https://cranlogs.r-pkg.org/badges/last-month/nettskjema.tsd?color=blue)](https://r-pkg.org/pkg/nettskjema.tsd) -->
 <!-- badges: end -->
 
-The goal of nettskjema.tsd is to ...
+Working with Nettskjema (<https://nettskjema.no/>) data inside TSD can be challenging. 
+This package aims to aid users in managing their incoming Nettskjema data by decrypting the data and storing the nettskjema data and meta-data in convenient and standardised ways. 
+This package functionality currently only works on the Linux VMs of TSD, and for version 1 of the nettskjema data delivery to TSD.
 
 ## Installation
 
@@ -38,18 +44,6 @@ library(nettskjema.tsd)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Code of Conduct
 
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+Please note that the nettskjema.tsd project is released with a [Contributor Code of Conduct](https://athanasiamo.github.io/nettskjema.tsd/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

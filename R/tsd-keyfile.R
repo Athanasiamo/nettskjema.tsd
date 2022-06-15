@@ -1,7 +1,7 @@
 #' Nettskjema TSD keyfile location
 #'
 #' As a security measure, all submissions to Nettskjema data in to
-#' TSD are encrypted. These encrypted files need to de decrypted
+#' TSD are encrypted. These encrypted files need to be decrypted
 #' before they can be sorted and prepared for use in R (or  other
 #' programs). To decrypt the data, R needs to have access to the
 #' secret key that will verify that the decryption is ok to carry
@@ -54,7 +54,7 @@ nettskjema_tsd_keyfile <- function(path = Sys.getenv("nettskjema.tsd.keyfile"),
 #' Import GPG key
 #'
 #' As a security measure, all submissions to Nettskjema data in to
-#' TSD are encrypted. These encrypted files need to de decrypted
+#' TSD are encrypted. These encrypted files need to be decrypted
 #' before they can be sorted and prepared for use in R (or  other
 #' programs). To decrypt the data, R needs to have access to the
 #' secret key that will verify that the decryption is ok to carry
@@ -86,7 +86,6 @@ nettskjema_tsd_import_key <- function(path = NULL,
     verbose <- verbosity()
   if(is.null(path))
     path <- nettskjema_tsd_keyfile(verbose = verbose)
-
   k <- sapply(path, function(x)
     system2(
       "gpg",
@@ -98,7 +97,6 @@ nettskjema_tsd_import_key <- function(path = NULL,
     invisible(
       lapply(k, function(x) message(paste(x, collapse="\n")))
     )
-
   invisible(k)
 }
 
@@ -109,7 +107,6 @@ nettskjema_tsd_import_key <- function(path = NULL,
 #' @noRd
 key_hash <- function(project = NULL){
   stopifnot(on_tsd())
-
   if(is.null(project))
     project <- identify_project()
   path <- sprintf("%s/nettskjema-submissions",
@@ -124,7 +121,6 @@ key_hash <- function(project = NULL){
 #' @noRd
 check_key <- function(){
   stopifnot(on_tsd())
-
   hash <- basename(nettskjema_tsd_submission_path())
   hash <- substr(hash, 9, 16)
   resp <- system2("gpg", "--list-secret-keys", stdout = TRUE)
