@@ -51,7 +51,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/nettskjematsd.html">Using nettskjema in TSD</a>
+    <a class="dropdown-item" href="articles/nettskjematsd.html">Using nettskjema.tsd in TSD</a>
   </div>
 </li>
 <li class="nav-item">
@@ -122,6 +122,21 @@
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
 <p>Please note that the nettskjema.tsd project is released with a <a href="https://athanasiamo.github.io/nettskjema.tsd/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
+<div class="section level2">
+<h2 id="dev-description">Dev description<a class="anchor" aria-label="anchor" href="#dev-description"></a>
+</h2>
+<p>Documentation of the package is in progress, at its core it:</p>
+<ul>
+<li>auto-detects gpg password by searching in default areas</li>
+<li>decrypts new files as they have come in</li>
+<li>copy files over to a new specified location</li>
+<li>merges submissions into a single file for csv, it checks for header compatibility between submissions, so even if the form has changed, this should not break.</li>
+<li>for json, it uses the meta-data accompanying a form to make sure column names are correct, also should not break if form changes.</li>
+<li>Moves all form attachments into an attachments folder</li>
+<li>if an edits-xxx.json file exists, will apply the edits specified in the file to the data and output a new csv file appended with ed.</li>
+</ul>
+<p>The package is still in development and has some messy code for now.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
