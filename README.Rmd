@@ -44,9 +44,14 @@ OR using the the package remotes to install.
 
 ```r
 # install.packages("remotes")
-remotes::install_github("lcbc-uio/questionnaires")
+remotes::install_github("lcbc-uio/nettskjema.tsd")
 ```
 
+To install inside TSD, download the latest tar for Linux from the [lcbc-uio r-universe](https://lcbc-uio.r-universe.dev/ui#package:nettskjema.tsd), import it into TSD, and install it with the following command (replacing the path with the correct imported location of the file)
+
+```r
+install.packages("/path/to/nettskjema.tsd_x.x.x.tar.gz", repos = NULL)
+```
 
 ## Caveats
 

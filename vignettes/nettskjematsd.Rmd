@@ -18,11 +18,8 @@ knitr::opts_chunk$set(
 library(nettskjema.tsd)
 ```
 
-Currently, nettskjema data sent to TSD are stored on `durable/nettskjema-submissions/XXX/` where each nettskjema har its own folder with the nettskjema id (that can be found in the URL of the nettskjema in the nettskjema portal). 
+Currently, nettskjema data sent to TSD are stored on `durable/nettskjema-submissions/XXX/` where each nettskjema has its own folder with the nettskjema id (that can be found in the URL of the nettskjema in the nettskjema portal). 
 All Nettskjema that are connected to our TSD project send data to this spot, with one file per response, in an encrypted file in both json and csv format.
-
-All answers to nettskjema can be found immedately in the Nettquick application within TSD (found under the main TULS page within TSD), and as such, quick inspection of incoming data should be done there. 
-The remaining Nettskjema pipeline is more elaborate, and only runs ever few hours.
 
 ## Pipeline in short
 At its core, the single function `nettskjema_tsd_organise_all_forms()` starts and sets up the entire pipeline for you. 
@@ -56,8 +53,7 @@ Here, just like in the raw folder, each nettskjema has its own folder using the 
     -- edits-177322.json
     -- form-177322.csv
     -- form-177322-json.csv
-    -- form-177322-json-wids.csv
-    -- form-177322-json-wids-ed.csv
+    -- form-177322-json-ed.csv
     -- submissions/
          -- decrypted/
 |    -- form-177322-2020-01-31-18-14-32.json
@@ -75,7 +71,7 @@ The encrypted are exactly as they are when they enter TSD, and the decrypted are
 Some nettskjema might also have attachment folders, which should contain all the attachments that might come with a nettskjema (if the form has the option to add attachments).
 
 ## Data decryption
-Data are encrypted and decrypted with gpg. 
+Data are encrypted and decrypted with [gpg](https://gnupg.org/). 
 
 The data that are encrypted are:
 
@@ -88,6 +84,8 @@ The data that are encrypted are:
 The submission data are combined into data sets for each nettskjema, using both the jsons and csv. 
 The data sources are a little different, which is why we create files from both.
 Generally, combining data from jsons are more robust than combining data from the csv sources, because the json files do not have issues with possible column mis-matches.
+
+Read more about the json data format on [digitalocean](https://www.digitalocean.com/community/tutorials/an-introduction-to-json).
 
 ## Data editing
 There are also options for creating edited versions of the data, in case there are incorrectly submitted values to the nettskjema data.
